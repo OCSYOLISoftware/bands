@@ -37,6 +37,15 @@ def get_user(req: Request):
     users = db.get_all()  # Obtener todos los usuarios
     return template.TemplateResponse("user.html", {"request": req, "users": users})
 
+@app.post("/delete_user", response_class=HTMLResponse)
+def delete_user(req: Request, username: str = Form()):
+    db = HandleDB()
+    db.delete(username)  # Eliminar el usuario por su nombre de usuario
+    users = db.get_all()  # Obtener la lista de usuarios actualizada
+    return template.TemplateResponse("user.html", {"request": req, "users": users})
+
+
+
 # Data processing route for sign up
 @app.post("/data-processing", response_class=RedirectResponse)
 def data_processing(firstname: str = Form(), lastname: str = Form(), username: str = Form(), password_user: str = Form()):

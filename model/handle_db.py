@@ -35,10 +35,19 @@ class HandleDB():
         conn.commit()  # Confirmar la transacción
         conn.close()  # Cerrar la conexión después de la inserción
 
+    def delete(self, username: str):
+        """Eliminar un usuario por su nombre de usuario."""
+        conn = self._connect()
+        cur = conn.cursor()
+        cur.execute("DELETE FROM users WHERE username = ?", (username,))
+        conn.commit()  # Confirmar la transacción
+        conn.close()  # Cerrar la conexión después de la eliminación
+
     def __del__(self):
         """Cerrar la conexión al final, si es necesario."""
         # No necesitamos cerrar la conexión aquí, ya que la cerramos después de cada operación
         pass
+
 
 '''
 class HandleDB():

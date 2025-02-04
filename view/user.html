@@ -28,6 +28,10 @@
             {% for user in users %}
                 <li class="list-group-item">
                     {{ user[1] }} {{ user[2] }} - {{ user[3] }}
+                    <form action="/delete_user" method="post" style="display:inline;">
+                      <input type="hidden" name="usarname" value="{{ user[3] }}">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
                 </li>
             {% endfor %}
         </ul>
