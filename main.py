@@ -23,16 +23,16 @@ def signup(req: Request):
     return template.TemplateResponse('signup.html', {"request":req})
 
 #bands = user
-@app.get('/bands', response_class=HTMLResponse)
+@app.get('/user', response_class=HTMLResponse)
 def get_bands(req: Request):
     return RedirectResponse('/')
     #return template.TemplateResponse('bands.html', {'request': req})
     
-@app.post('/bands', response_class=HTMLResponse)
+@app.post('/user', response_class=HTMLResponse)
 def get_bands(req: Request, username: str = Form(), password_user: str = Form()):
     verify = check_user(username, password_user)
     if verify:
-        return template.TemplateResponse('bands.html', {'request': req, "data_user": verify})
+        return template.TemplateResponse('user.html', {'request': req, "data_user": verify})
     return RedirectResponse('/', status_code=303)
 
 @app.post('/data-processing')
