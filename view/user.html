@@ -4,22 +4,33 @@
 {% block content %}
     <div class="row m-sm-5 m-3">
         <h1 class="text-primary">User</h1>
-        <p class="lead">Welcome {{ data_user[1]}} {{ data_user[2]}}.</p>
+        <p class="lead">Welcome {{ data_user[1] }} {{ data_user[2] }}.</p>
         <p class="lead">This will be a database for bands.</p>
     </div>
 
     <div class="row justify-content-center">
         <div class="card col-5" style="width: 18rem">
-          <div class="card-body">
-            <h5 class="card-title">Hi <mark>{{ data_user[3] }}</mark></h5>
-            <p class="card-text">This is a list with your data.</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Firstname: <mark>{{ data_user[1] }}</mark></li>
-            <li class="list-group-item">Lastname: <mark>{{ data_user[2] }}</mark></li>
-            <li class="list-group-item">Username: <mark>{{ data_user[3] }}</mark></li>
-          </ul>
+            <div class="card-body">
+                <h5 class="card-title">Hi <mark>{{ data_user[3] }}</mark></h5>
+                <p class="card-text">This is a list with your data.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Firstname: <mark>{{ data_user[1] }}</mark></li>
+                <li class="list-group-item">Lastname: <mark>{{ data_user[2] }}</mark></li>
+                <li class="list-group-item">Username: <mark>{{ data_user[3] }}</mark></li>
+            </ul>
         </div>
-      </div>
+    </div>
 
-    {% endblock %}
+    <div class="row justify-content-center mt-5">
+        <h3>All Users</h3>
+        <ul class="list-group">
+            {% for user in users %}
+                <li class="list-group-item">
+                    {{ user[1] }} {{ user[2] }} - {{ user[3] }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
