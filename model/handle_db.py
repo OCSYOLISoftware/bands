@@ -49,6 +49,52 @@ class HandleDB():
         pass
 
 
+    # ------------------------- MÉTODOS PARA BANDAS ------------------------- #
+
+    def get_all_bands(self):
+        """Obtener todas las bandas de la base de datos."""
+        conn = self._connect()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM bands")
+        data = cur.fetchall()
+        conn.close()
+        return data
+
+    def get_band(self, band_name):
+        """Obtener una banda por su nombre."""
+        conn = self._connect()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM bands WHERE name = ?", (band_name,))
+        data = cur.fetchone()
+        conn.close()
+        return data
+
+    def insert_band(self, data_band):
+        """Insertar una nueva banda en la base de datos."""
+        conn = self._connect()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO bands (name, record_label_id) VALUES (?, ?)",
+                    (data_band['name'], data_band['record_label_id']))
+        conn.commit()
+        conn.close()
+
+    def delete_band(self, band_name):
+        """Eliminar una banda por su nombre."""
+        conn = self._connect()
+        cur = conn.cursor()
+        cur.execute("DELETE FROM bands WHERE name = ?", (band_name,))
+        conn.commit()
+        conn.close()
+
+    # ------------------------- MÉTODOS PARA Recod Label ------------------------- #
+    def get_all_record_labels(self):
+        conn = self._connect()
+        cur = conn.cursor()
+        cur.execute("SELECT id, name FROM record_labels")  # Asegúrate de que la tabla se llame correctamente
+        labels = cur.fetchall()
+        conn.close()
+        return labels  # Devuelve una lista de tuplas (id, name)
+
 '''
 class HandleDB():
     def __init__(self):

@@ -58,3 +58,24 @@ def data_processing(firstname: str = Form(), lastname: str = Form(), username: s
     db = User(data_user)
     db.create_user()
     return RedirectResponse("/", status_code=303)
+
+# ------------------------- Rutas PARA BANDAS ------------------------- #
+
+@app.get('/add_band', response_class=HTMLResponse)
+def add_band_form(req: Request):
+    db = HandleDB()
+    record_label = db.get_all_record_labels()
+    #Mostrar formulario para agregar banda
+    return template.TemplateResponse('/band/add_band.html', {'request': req, 'record_labels': record_label})
+
+@app.post('/add_band', response_class=HTMLResponse)
+def add_band(req: Request, name: str = Form(), record_label_id: str = Form()):
+    #Convertir cadena a entero
+    record_label_id = int(record_label_id)
+
+    data_band = {
+        'name': name,
+        'record_label_id': record_label_id
+    }
+    db.insert_band(data_band)
+    return RedirectResponse('add_band', status_code=303)

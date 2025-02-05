@@ -1,0 +1,28 @@
+{% extends "components/layout.html" %}
+
+{% block title %}Add Band{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add a New Band</h2>
+    <form method="post" action="/add_band">
+        <div class="mb-3">
+            <label for="band_name" class="form-label">Band Name</label>
+            <input type="text" name="name" class="form-control" id="band_name" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="validationDefault04" class="form-label">Record Label</label>
+            <select name="record_label_id" class="form-select" id="validationDefault04" required>
+                <option selected disabled value="">Choose...</option>
+                {% for label in record_labels %}
+                    <option value="{{ label[0] }}">{{ label[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Add Band</button>
+    </form>
+</div>
+{% endblock %}
