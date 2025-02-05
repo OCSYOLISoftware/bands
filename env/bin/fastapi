@@ -1,4 +1,4 @@
-#!/home/aldair/Desktop/bands/env/bin/python3
+#!/home/mraldair/proyectos/bands/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
